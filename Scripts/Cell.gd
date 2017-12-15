@@ -1,15 +1,28 @@
 extends Area2D
 
-enum Modifier {ANGLE, MIRROR,COLOR_SWITCH, TELLEPORT}
-#export (Global.Colors) var color 
-#export (Modifier) var modifier
-export(int, -1, 1, 2) var flipped = 1
-export(Vector2) var teleport_position
+enum Modifier {ANGLE, MIRROR, COLOR_SWITCH, TELLEPORT, NULL}
+export (preload("res://Scripts/Global.gd").Colors) var color = preload("res://Scripts/Global.gd").Colors.WHITE
+export (Modifier) var modifier
+export(bool) var flipped = false
+export(NodePath) var teleport_location
 
-##############TODO: REMOVE. TESTING ONLY########
-#var color = Global.Colors.WHITE
-var modifier = Modifier.COLOR_SWITCH
-################################################
+func _ready():
+	# This is a hack and I don't like it. Seems like export (int, -1, 1, 2) doesn't work correctly: bug
+	flipped = -1 if flipped else 1
+	
+	$CellSprite.modulate = Global.which_color(color)
+	
+	if modifier != Modifier.NULL:
+		$CellSprite.get_node("ModifierSprite").texture = load(match_modifier())
+		if flipped == -1:
+			$CellSprite.get_node("ModifierSprite").rotation_degrees = 90 
+
+func match_modifier():
+	match modifier:
+		ANGLE: 			return "res://Art/Angle.png"
+		MIRROR: 		return "res://Art/Mirror.png"
+		COLOR_SWITCH: 	return "res://Art/ColorSwitch.png"
+		TELLEPORT: 		return "res://Art/Telleport.png"
 
 func update_instructions(player):
 	var direction = player.direction
@@ -21,27 +34,15 @@ func update_instructions(player):
 				if direction.x != 0:
 					direction = Vector2(0, direction.x * flipped)
 				elif direction.y !=0:
-					# TODO: Make sure that I can just have negative sign. Might need to multiple by -1
 					direction = Vector2(-direction.y * flipped,0)
 			Modifier.MIRROR: 
 				direction *= -1
 			Modifier.COLOR_SWITCH:
 				player.color = color 
 			Modifier.TELLEPORT:
-				 player.position = teleport_position
+				 player.position = teleport_location.position
 	
 	player.direction = direction
 	if modifier != Modifier.TELLEPORT:
 		# Set next target poisition at next cell. Multiply by 64 because that is texture size
 		player.target_position = position + direction * 64
-
-func _ready():
-	$CellSprite.modulate = Global.which_color(Global.Colors.WHITE) ##############TODO: CHANGE
-	
-	var modifierTexture
-	match modifier:
-		Modifier.ANGLE: modifierTexture = load("res://Art/Angle.png")
-		Modifier.MIRROR: modifierTexture = load("res://Art/Mirror.png")
-		Modifier.COLOR_SWITCH: modifierTexture = load("res://Art/ColorSwitch.png")
-		Modifier.TELLEPORT: modifierTexture = load("res://Art/Telleport.png")
-	$CellSprite.get_node("ModifierSprite").texture = modifierTexture

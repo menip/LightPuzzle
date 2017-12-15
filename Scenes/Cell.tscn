@@ -21,8 +21,10 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
-flipped = 1
-teleport_position = null
+color = 0
+modifier = 0
+flipped = true
+teleport_location = null
 
 [node name="CellSprite" type="Sprite" parent="."]
 
