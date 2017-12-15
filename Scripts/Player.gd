@@ -4,8 +4,7 @@ export(int) var SPEED = 10
 export(int) var POSITION_SNAP_AMOUNT = 5
 
 # Player only interacts with objects of same color
-enum Colors {WHITE, RED, BLUE}
-export(Colors) var color = Colors.WHITE
+export var color = Global.Colors.WHITE
 
 var direction
 var target_position
@@ -26,7 +25,7 @@ func _process(delta):
 	# If we are close to desired position, snap to it, and obtain further instructions
 	if (position - target_position).length() <= POSITION_SNAP_AMOUNT:
 		position = target_position
-		current_square.update_instructions()
+		current_square.update_instructions(self)
 
 
 func _on_Player_area_entered( area ):

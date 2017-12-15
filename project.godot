@@ -13,6 +13,10 @@ config_version=3
 config/name="LightPuzzle"
 config/icon="res://icon.png"
 
+[autoload]
+
+Global="*res://Scripts/Global.gd"
+
 [gdnative]
 
 singletons=[  ]
