@@ -3,8 +3,9 @@ extends Area2D
 enum Modifier {ANGLE, MIRROR, COLOR_SWITCH, TELLEPORT, NULL}
 export (preload("res://Scripts/Global.gd").Colors) var color = preload("res://Scripts/Global.gd").Colors.WHITE
 export (Modifier) var modifier
+export(Vector2) var teleport_location
 export(bool) var flipped = false
-export(NodePath) var teleport_location
+export(bool) var final = false #TODO: Implement this logic
 
 func _ready():
 	# This is a hack and I don't like it. Seems like export (int, -1, 1, 2) doesn't work correctly: bug

@@ -22,9 +22,10 @@ __meta__ = {
 "_edit_group_": true
 }
 color = 0
-modifier = 0
-flipped = true
+modifier = 4
+flipped = false
 teleport_location = null
+final = false
 
 [node name="CellSprite" type="Sprite" parent="."]
 
