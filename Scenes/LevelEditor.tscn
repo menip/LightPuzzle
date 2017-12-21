@@ -1,12 +1,26 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Art/Cell.png" type="Texture" id=1]
-[ext_resource path="res://Art/Angle.png" type="Texture" id=2]
-[ext_resource path="res://Art/Mirror.png" type="Texture" id=3]
-[ext_resource path="res://Art/Telleport.png" type="Texture" id=4]
-[ext_resource path="res://Art/ColorSwitch.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/LevelEditor.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Cell.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Art/Cell.png" type="Texture" id=3]
+[ext_resource path="res://Art/Angle.png" type="Texture" id=4]
+[ext_resource path="res://Art/Mirror.png" type="Texture" id=5]
+[ext_resource path="res://Art/Telleport.png" type="Texture" id=6]
+[ext_resource path="res://Art/ColorSwitch.png" type="Texture" id=7]
 
-[node name="Control" type="Control"]
+[sub_resource type="Curve" id=1]
+
+min_value = 0.0
+max_value = 1.0
+bake_resolution = 100
+_data = [ Vector2( 0.0125386, 0.822266 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+
+width = 64
+curve = SubResource( 1 )
+
+[node name="LevelEditor" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -19,9 +33,15 @@ rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
+cell = ExtResource( 2 )
+
+[node name="Position2D" type="Position2D" parent="."]
+
+position = Vector2( 200, 30 )
 
 [node name="GridContainer" type="GridContainer" parent="."]
 
@@ -29,20 +49,19 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -356.5
-margin_top = -108.0
-margin_right = 355.5
+margin_left = -495.5
+margin_top = -569.0
+margin_right = -375.5
+margin_bottom = -28.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_constants/vseparation = 0
-custom_constants/hseparation = 100
-columns = 5
+custom_constants/vseparation = 30
+columns = 1
 __meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
+"_edit_group_": true
 }
 
 [node name="ColorsButtons" type="GridContainer" parent="GridContainer"]
@@ -51,8 +70,9 @@ editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
-anchor_bottom = 1.0
-margin_right = 103.0
+anchor_bottom = 0.0
+margin_right = 120.0
+margin_bottom = 90.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 hint_tooltip = "Cell Color"
@@ -71,7 +91,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 103.0
+margin_right = 120.0
 margin_bottom = 20.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -92,7 +112,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 35.0
-margin_right = 103.0
+margin_right = 120.0
 margin_bottom = 55.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -113,7 +133,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 70.0
-margin_right = 103.0
+margin_right = 120.0
 margin_bottom = 90.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -130,13 +150,13 @@ flat = false
 
 [node name="CellModifierButtons" type="GridContainer" parent="GridContainer"]
 
-editor/display_folded = true
-anchor_left = 0.5
+anchor_left = 0.0
 anchor_top = 0.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -180.0
-margin_right = 180.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 120.0
+margin_right = 120.0
+margin_bottom = 388.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 hint_tooltip = "Cell type"
@@ -144,7 +164,7 @@ mouse_filter = 1
 size_flags_horizontal = 1
 size_flags_vertical = 1
 custom_constants/hseparation = 10
-columns = 5
+columns = 1
 __meta__ = {
 "_edit_group_": true
 }
@@ -166,7 +186,7 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-texture_normal = ExtResource( 1 )
+texture_normal = ExtResource( 3 )
 
 [node name="Angled" type="TextureButton" parent="GridContainer/CellModifierButtons"]
 
@@ -174,49 +194,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 74.0
-margin_right = 138.0
-margin_bottom = 64.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-texture_normal = ExtResource( 2 )
-
-[node name="Mirror" type="TextureButton" parent="GridContainer/CellModifierButtons"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 148.0
-margin_right = 212.0
-margin_bottom = 64.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-texture_normal = ExtResource( 3 )
-
-[node name="Telleport" type="TextureButton" parent="GridContainer/CellModifierButtons"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 222.0
-margin_right = 286.0
-margin_bottom = 64.0
+margin_top = 68.0
+margin_right = 64.0
+margin_bottom = 132.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -228,15 +208,15 @@ shortcut = null
 group = null
 texture_normal = ExtResource( 4 )
 
-[node name="ColorSwitch" type="TextureButton" parent="GridContainer/CellModifierButtons"]
+[node name="Mirror" type="TextureButton" parent="GridContainer/CellModifierButtons"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 296.0
-margin_right = 360.0
-margin_bottom = 64.0
+margin_top = 136.0
+margin_right = 64.0
+margin_bottom = 200.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -248,13 +228,56 @@ shortcut = null
 group = null
 texture_normal = ExtResource( 5 )
 
+[node name="Telleport" type="TextureButton" parent="GridContainer/CellModifierButtons"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 204.0
+margin_right = 64.0
+margin_bottom = 268.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = ExtResource( 6 )
+
+[node name="ColorSwitch" type="TextureButton" parent="GridContainer/CellModifierButtons"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 204.0
+margin_right = 64.0
+margin_bottom = 268.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = ExtResource( 7 )
+
 [node name="Save" type="GridContainer" parent="GridContainer"]
 
-anchor_left = 1.0
+anchor_left = 0.0
 anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -100.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 418.0
+margin_right = 120.0
+margin_bottom = 472.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 hint_tooltip = "Enter level name and save"
@@ -264,38 +287,27 @@ size_flags_vertical = 1
 custom_constants/vseparation = 10
 custom_constants/hseparation = 0
 columns = 1
-__meta__ = {
-"_edit_group_": true
-}
 
-[node name="LevelName" type="TextEdit" parent="GridContainer/Save"]
+[node name="LevelName" type="LineEdit" parent="GridContainer/Save"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 100.0
-margin_bottom = 25.0
-rect_min_size = Vector2( 100, 25 )
+margin_right = 70.0
+margin_bottom = 24.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-text = "LevelName"
-readonly = false
-highlight_current_line = false
-syntax_highlighting = false
-show_line_numbers = false
-highlight_all_occurrences = false
-override_selected_font_color = false
-context_menu_enabled = true
-smooth_scrolling = false
-v_scroll_speed = 80.0
-hiding_enabled = 0
-caret_block_mode = false
+text = "Level_XX"
+expand_to_text_length = true
+focus_mode = 2
+placeholder_alpha = 0.6
 caret_blink = false
 caret_blink_speed = 0.65
+context_menu_enabled = true
 
 [node name="SaveButton" type="Button" parent="GridContainer/Save"]
 
@@ -303,9 +315,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 35.0
-margin_right = 100.0
-margin_bottom = 55.0
+margin_top = 34.0
+margin_right = 70.0
+margin_bottom = 54.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -318,5 +330,34 @@ shortcut = null
 group = null
 text = "Save"
 flat = false
+
+[node name="Highlight" type="Sprite" parent="."]
+
+modulate = Color( 0.886719, 0.585373, 0.585373, 0.83 )
+position = Vector2( 193.303, 47.1625 )
+scale = Vector2( 1, 64 )
+texture = SubResource( 2 )
+
+[node name="PopupMenu" type="PopupMenu" parent="."]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 20.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+popup_exclusive = false
+items = [  ]
+hide_on_checkable_item_selection = false
+
+[connection signal="pressed" from="GridContainer/Save/SaveButton" to="." method="_on_SaveButton_pressed"]
+
+[connection signal="id_pressed" from="PopupMenu" to="." method="_on_PopupMenu_id_pressed"]
 
 

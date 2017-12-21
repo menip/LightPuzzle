@@ -23,8 +23,8 @@ __meta__ = {
 }
 color = 0
 modifier = 4
-flipped = false
 teleport_location = null
+flipped = false
 final = false
 
 [node name="CellSprite" type="Sprite" parent="."]

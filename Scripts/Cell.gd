@@ -10,10 +10,6 @@ func _ready():
 	# This is a hack and I don't like it. Seems like export (int, -1, 1, 2) doesn't work correctly: bug
 	flipped = -1 if flipped else 1
 	
-	#########TODO: REMOVE##################
-	modifier = Global.Modifier.DEFAULT
-	####################################
-	
 	update_self()
 
 func update_instructions(player):
@@ -39,14 +35,14 @@ func update_instructions(player):
 func update_self():
 	if final: 
 		color = Global.Colors.FINAL
-
+	
 	$CellSprite.modulate = Global.which_color(color)
 	$CellSprite.get_node("ModifierSprite").texture = load(match_modifier())
 	$CellSprite.get_node("ModifierSprite").rotation_degrees = 90 if flipped == -1 else 0
 
 func match_modifier():
 	match modifier:
-		Global.Modifier.ANGLE: 			return "res://Art/Angle.png"
+		Global.Modifier.ANGLE:			return "res://Art/Angle.png"
 		Global.Modifier.MIRROR: 		return "res://Art/Mirror.png"
 		Global.Modifier.COLOR_SWITCH: 	return "res://Art/ColorSwitch.png"
 		Global.Modifier.TELLEPORT: 		return "res://Art/Telleport.png"
