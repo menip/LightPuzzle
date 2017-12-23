@@ -4,19 +4,18 @@ export(PackedScene) var player
 export(PackedScene) var cell
 
 var level
+var cells = {}
+var player_instance
+var level_area = Rect2(Vector2(200,30), Global.CELL_SIZE * Global.GRID_SIZE)
 
 var color_choice = Global.Colors.WHITE
 var direction_choice = Vector2(0,1)
 
-var player_instance
-
-var level_area = Rect2(Vector2(200,30), Global.CELL_SIZE * Global.GRID_SIZE)
 var mouse_position
-var cells = {}
 
 func _ready():
 	##########TODO: REMOVE#######
-	setup_level("Level_XX")
+	setup_level("Level_YY")
 	#############################
 	
 	$CanvasLayer/WinLossContainer.hide()
@@ -124,7 +123,12 @@ func update_instructions():
 	if cells.has(player_instance.position):
 		var current_cell = cells[player_instance.position]
 		
-		if current_cell.modifier == Global.Modifier.COLOR_SWITCH:
+		# Player only interacts with objects of same color, unless we are on a color switch tile
+		if current_cell.modifier == Global.Modifier.FINAL:
+			success()
+			# NOTE: player is still on this cell, so we will continue hitting this code.
+			return
+		elif current_cell.modifier == Global.Modifier.COLOR_SWITCH:
 			player_instance.color = current_cell.color
 		elif player_instance.color == current_cell.color:
 			match current_cell.modifier:
@@ -139,10 +143,6 @@ func update_instructions():
 						failed()
 						return
 					direction *= -1
-				Global.Modifier.FINAL:
-					success()
-					# NOTE: player is still on this cell, so we will continue hitting this code.
-					return
 		
 		player_instance.direction = direction
 	

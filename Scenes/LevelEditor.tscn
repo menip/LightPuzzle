@@ -1,13 +1,12 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/LevelEditor.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Cell.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Art/Cell.png" type="Texture" id=3]
 [ext_resource path="res://Art/Angle.png" type="Texture" id=4]
 [ext_resource path="res://Art/Mirror.png" type="Texture" id=5]
-[ext_resource path="res://Art/Telleport.png" type="Texture" id=6]
-[ext_resource path="res://Art/ColorSwitch.png" type="Texture" id=7]
-[ext_resource path="res://Art/Final.png" type="Texture" id=8]
+[ext_resource path="res://Art/ColorSwitch.png" type="Texture" id=6]
+[ext_resource path="res://Art/Final.png" type="Texture" id=7]
 
 [sub_resource type="Curve" id=1]
 
@@ -222,9 +221,8 @@ shortcut = null
 group = null
 texture_normal = ExtResource( 5 )
 
-[node name="Telleport" type="TextureButton" parent="GridContainer/CellModifierButtons" index="3"]
+[node name="ColorSwitch" type="TextureButton" parent="GridContainer/CellModifierButtons" index="3"]
 
-visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -242,26 +240,7 @@ shortcut = null
 group = null
 texture_normal = ExtResource( 6 )
 
-[node name="ColorSwitch" type="TextureButton" parent="GridContainer/CellModifierButtons" index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 204.0
-margin_right = 64.0
-margin_bottom = 268.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-texture_normal = ExtResource( 7 )
-
-[node name="Final" type="TextureButton" parent="GridContainer/CellModifierButtons" index="5"]
+[node name="Final" type="TextureButton" parent="GridContainer/CellModifierButtons" index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -278,7 +257,7 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-texture_normal = ExtResource( 8 )
+texture_normal = ExtResource( 7 )
 _sections_unfolded = [ "Textures" ]
 
 [node name="Save" type="GridContainer" parent="GridContainer" index="2"]

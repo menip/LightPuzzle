@@ -5,9 +5,7 @@ signal update_instructions
 export(int) var SPEED = 64
 export(int) var POSITION_SNAP_AMOUNT = 5
 
-# Player only interacts with objects of same color
-export(preload("res://Scripts/Global.gd").Colors) var color = preload("res://Scripts/Global.gd").Colors.WHITE
-
+var color
 var direction
 var target_position
 var current_square

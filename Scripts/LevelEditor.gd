@@ -1,7 +1,3 @@
-# Scene for creating levels. 
-# Note that for game to function correctly right now, there needs to be either zero, or exactly two telleport cells that point to each other
-# Don't use telleport at all for now, will maybe be implemented later
-
 extends Control
 
 export(PackedScene) var cell
@@ -24,8 +20,6 @@ func _ready():
 	
 	# Setup right click menu
 	$PopupMenu.add_item("Flip")
-	#$PopupMenu.add_item("Set final")
-	#$PopupMenu.add_item("Set telleport location")
 	
 	# Connect color change signals
 	$GridContainer/ColorsButtons/White.connect("pressed", self, "_on_color_change", [Global.Colors.WHITE])
@@ -36,7 +30,6 @@ func _ready():
 	$GridContainer/CellModifierButtons/Cell.connect("pressed", self, "_on_modifier_change", [Global.Modifier.DEFAULT])
 	$GridContainer/CellModifierButtons/Angled.connect("pressed", self, "_on_modifier_change", [Global.Modifier.ANGLE])
 	$GridContainer/CellModifierButtons/Mirror.connect("pressed", self, "_on_modifier_change", [Global.Modifier.MIRROR])
-	$GridContainer/CellModifierButtons/Telleport.connect("pressed", self, "_on_modifier_change", [Global.Modifier.TELLEPORT])
 	$GridContainer/CellModifierButtons/ColorSwitch.connect("pressed", self, "_on_modifier_change", [Global.Modifier.COLOR_SWITCH])
 	$GridContainer/CellModifierButtons/Final.connect("pressed", self, "_on_modifier_change", [Global.Modifier.FINAL])
 
@@ -63,7 +56,7 @@ func _process(delta):
 				add_child(new_cell)
 				cells[current_cell_position] = new_cell
 				
-			# Make sure we aren't tinting FINAL sprite
+			# Make sure we aren't tinting final sprite
 			if modifier == Global.Modifier.FINAL:
 				cells[current_cell_position].color = Global.Colors.WHITE
 				
@@ -85,8 +78,8 @@ func _on_color_change(new_color):
 func _on_modifier_change(new_modifier):
 	modifier = new_modifier
 
-#TODO: Clean this up
 func _on_PopupMenu_id_pressed( ID ):
+	# Is it possible to match by item, rather than index?
 	match ID:
 		0: cells[current_cell_position].flipped *= -1
 	cells[current_cell_position].update_self()
