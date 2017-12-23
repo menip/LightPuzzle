@@ -3,13 +3,54 @@ extends Control
 export(PackedScene) var player
 export(PackedScene) var cell
 
-func _ready():
-	load_level("Level_01")
+var level
 
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+var color_choice = Global.Colors.WHITE
+var direction_choice = Vector2(0,1)
+
+var player_instance
+
+var level_area = Rect2(Vector2(200,30), Global.CELL_SIZE * Global.GRID_SIZE)
+var mouse_position
+var cells = {}
+
+func _ready():
+	##########TODO: REMOVE#######
+	setup_level("Level_XX")
+	#############################
+	
+	$CanvasLayer/WinLossContainer.hide()
+	
+	# Setup Direction change signals
+	$CanvasLayer/HUD/Directions/Up.connect("pressed", self, "_on_direction_choice_change", [Vector2(0, -1)])
+	$CanvasLayer/HUD/Directions/Down.connect("pressed", self, "_on_direction_choice_change", [Vector2(0, 1)])
+	$CanvasLayer/HUD/Directions/Left.connect("pressed", self, "_on_direction_choice_change", [Vector2(-1, 0)])
+	$CanvasLayer/HUD/Directions/Right.connect("pressed", self, "_on_direction_choice_change", [Vector2(1, 0)])
+	
+	# Setup Color chang signals
+	$CanvasLayer/HUD/Colors/White.connect("pressed", self, "_on_color_choice_change", [Global.Colors.WHITE])
+	$CanvasLayer/HUD/Colors/Red.connect("pressed", self, "_on_color_choice_change", [Global.Colors.RED])
+	$CanvasLayer/HUD/Colors/Blue.connect("pressed", self, "_on_color_choice_change", [Global.Colors.BLUE])
+
+func _process(delta):
+	if player_instance != null and !level_area.has_point(player_instance.position):
+		failed()
+	
+	$Highlight.hide()
+	
+	# Only concerned with mouse input inside of level grid
+	var snapped_position = get_global_mouse_position().snapped(Global.CELL_SIZE) #TODO: Ask if bad practice to be creating this new var every process cycle
+	if level_area.has_point(snapped_position):
+		$Highlight.position = snapped_position
+		$Highlight.show()
+		
+		if Input.is_action_just_pressed("left_click") and !cells.has(snapped_position):
+			start_game(snapped_position)
+
+func setup_level(name):
+	level = name
+	$CanvasLayer/HUD/LevelName.text = name
+	load_level(name)
 
 func load_level(name):
 	var level = File.new()
@@ -30,10 +71,88 @@ func load_level(name):
 		var new_cell = cell.instance()
 		new_cell.position = Vector2(current_line["posx"], current_line["posy"])
 		new_cell.color = int(current_line["color"])
-		new_cell.modifier = int(current_line["modifier"]) #Why this not work then?
+		new_cell.modifier = int(current_line["modifier"])
 		new_cell.flipped = current_line["flipped"]
-		new_cell.final = current_line["final"]
-		add_child(new_cell)
 		
-		print(new_cell.modifier)
+		print(current_line["flipped"], new_cell.flipped)
+		
+		cells[new_cell.position] = new_cell
+		add_child(new_cell)
+
+func _on_direction_choice_change(choice):
+	direction_choice = choice
+
+func _on_color_choice_change(choice):
+	color_choice = choice
+
+func start_game(spawn_position):
+	if player_instance == null:
+		player_instance = player.instance()
+		player_instance.position = spawn_position
+		player_instance.direction = direction_choice
+		player_instance.color = color_choice
+		
+		player_instance.target_position = spawn_position + direction_choice * Global.CELL_SIZE
+		
+		add_child(player_instance)
+		
+		# Connect player signal
+		$Player.connect("update_instructions", self, "update_instructions")
+
+func success():
+	$CanvasLayer/WinLossContainer.show()
+	$CanvasLayer/WinLossContainer/WinLossText.text = "Success!"
+	$CanvasLayer/WinLossContainer/WinLossButton.text = "Next"
 	
+	$CanvasLayer/WinLossContainer/WinLossButton.connect("pressed", self, "next_level")
+
+func failed():
+	remove_child(player_instance)
+	player_instance = null
+	
+	$CanvasLayer/WinLossContainer.show()
+	$CanvasLayer/WinLossContainer/WinLossText.text = "Failed"
+	$CanvasLayer/WinLossContainer/WinLossButton.text = "Retry"
+	
+	$CanvasLayer/WinLossContainer/WinLossButton.connect("pressed", self, "reload_level")
+
+func update_instructions():
+	var direction = player_instance.direction
+	var target_position = player_instance.target_position
+	
+	# If player is in square that contains cell
+	if cells.has(player_instance.position):
+		var current_cell = cells[player_instance.position]
+		
+		if current_cell.modifier == Global.Modifier.COLOR_SWITCH:
+			player_instance.color = current_cell.color
+		elif player_instance.color == current_cell.color:
+			match current_cell.modifier:
+				Global.Modifier.ANGLE:
+					if direction.x != 0:
+						direction = Vector2(0, direction.x * -current_cell.flipped)
+					elif direction.y !=0:
+						direction = Vector2(-direction.y * current_cell.flipped,0)
+				Global.Modifier.MIRROR: 
+					# If player hits mirror at it's side, level is failed and player shatters
+					if abs(player_instance.direction.x) == current_cell.flipped or -abs(player_instance.direction.y) == current_cell.flipped: # flipped is int: 1 when not flipped, -1 when flipped
+						failed()
+						return
+					direction *= -1
+				Global.Modifier.FINAL:
+					success()
+					# NOTE: player is still on this cell, so we will continue hitting this code.
+					return
+		
+		player_instance.direction = direction
+	
+	# Set next target poisition at next square.
+	player_instance.target_position = player_instance.position + player_instance.direction * Global.CELL_SIZE
+	
+func next_level():
+	#TODO
+	#get_tree.set_current_scene(next_scene_if_there_is_one)
+	pass
+	
+func reload_level():
+	get_tree().reload_current_scene()

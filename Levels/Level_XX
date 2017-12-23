@@ -1,6 +1,9 @@
-{"posx":576, "posy":256, "color":2, "modifier":4, "flipped":1, "final":false}
-{"posx":576, "posy":192, "color":2, "modifier":4, "flipped":1, "final":false}
-{"posx":640, "posy":192, "color":2, "modifier":0, "flipped":1, "final":false}
-{"posx":704, "posy":192, "color":2, "modifier":4, "flipped":1, "final":false}
-{"posx":768, "posy":192, "color":2, "modifier":4, "flipped":1, "final":false}
-{"posx":768, "posy":128, "color":2, "modifier":0, "flipped":1, "final":false}
+{"color":1,"flipped":1,"modifier":2,"posx":512,"posy":192}
+{"color":1,"flipped":1,"modifier":0,"posx":512,"posy":320}
+{"color":2,"flipped":1,"modifier":2,"posx":384,"posy":320}
+{"color":2,"flipped":-1,"modifier":0,"posx":320,"posy":320}
+{"color":0,"flipped":1,"modifier":2,"posx":320,"posy":256}
+{"color":0,"flipped":1,"modifier":1,"posx":320,"posy":192}
+{"color":0,"flipped":1,"modifier":5,"posx":320,"posy":384}
+{"color":0,"flipped":-1,"modifier":1,"posx":704,"posy":192}
+{"color":0,"flipped":1,"modifier":1,"posx":512,"posy":256}

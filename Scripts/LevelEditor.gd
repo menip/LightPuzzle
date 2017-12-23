@@ -24,7 +24,7 @@ func _ready():
 	
 	# Setup right click menu
 	$PopupMenu.add_item("Flip")
-	$PopupMenu.add_item("Set final")
+	#$PopupMenu.add_item("Set final")
 	#$PopupMenu.add_item("Set telleport location")
 	
 	# Connect color change signals
@@ -38,6 +38,7 @@ func _ready():
 	$GridContainer/CellModifierButtons/Mirror.connect("pressed", self, "_on_modifier_change", [Global.Modifier.MIRROR])
 	$GridContainer/CellModifierButtons/Telleport.connect("pressed", self, "_on_modifier_change", [Global.Modifier.TELLEPORT])
 	$GridContainer/CellModifierButtons/ColorSwitch.connect("pressed", self, "_on_modifier_change", [Global.Modifier.COLOR_SWITCH])
+	$GridContainer/CellModifierButtons/Final.connect("pressed", self, "_on_modifier_change", [Global.Modifier.FINAL])
 
 func _process(delta):
 	$Highlight.hide()
@@ -61,9 +62,14 @@ func _process(delta):
 				
 				add_child(new_cell)
 				cells[current_cell_position] = new_cell
-			
+				
+			# Make sure we aren't tinting FINAL sprite
+			if modifier == Global.Modifier.FINAL:
+				cells[current_cell_position].color = Global.Colors.WHITE
+				
 			# Updated cell values, now let cell update itself
 			cells[current_cell_position].update_self()
+			
 		elif cells.has(current_cell_position):
 			if Input.is_mouse_button_pressed(BUTTON_RIGHT):
 				$PopupMenu.rect_position = mouse_position
@@ -83,7 +89,6 @@ func _on_modifier_change(new_modifier):
 func _on_PopupMenu_id_pressed( ID ):
 	match ID:
 		0: cells[current_cell_position].flipped *= -1
-		1: cells[current_cell_position].final = true
 	cells[current_cell_position].update_self()
 
 func _on_SaveButton_pressed():
@@ -96,8 +101,7 @@ func _on_SaveButton_pressed():
 			"posy"		: cells[i].position.y,
 			"color"		: cells[i].color, 
 			"modifier"	: cells[i].modifier, 
-			"flipped"	: cells[i].flipped, 
-			"final"		: cells[i].final
+			"flipped"	: cells[i].flipped
 			}
 		# Convert dictionary to string, parse that as JSON, and store the result in file
 		level_save.store_line(to_json(save_dict))

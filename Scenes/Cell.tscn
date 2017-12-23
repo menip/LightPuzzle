@@ -27,13 +27,13 @@ teleport_location = null
 flipped = false
 final = false
 
-[node name="CellSprite" type="Sprite" parent="."]
+[node name="CellSprite" type="Sprite" parent="." index="0"]
 
 texture = ExtResource( 2 )
 
-[node name="ModifierSprite" type="Sprite" parent="CellSprite"]
+[node name="ModifierSprite" type="Sprite" parent="CellSprite" index="0"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
 shape = SubResource( 1 )
 
