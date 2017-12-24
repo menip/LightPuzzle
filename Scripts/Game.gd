@@ -73,8 +73,6 @@ func load_level(name):
 		new_cell.modifier = int(current_line["modifier"])
 		new_cell.flipped = current_line["flipped"]
 		
-		print(current_line["flipped"], new_cell.flipped)
-		
 		cells[new_cell.position] = new_cell
 		add_child(new_cell)
 
@@ -151,7 +149,7 @@ func update_instructions():
 	
 func next_level():
 	#TODO
-	#get_tree.set_current_scene(next_scene_if_there_is_one)
+	#get_tree().set_current_scene(next_scene_if_there_is_one)
 	pass
 	
 func reload_level():
