@@ -2,7 +2,7 @@ extends Area2D
 
 var color
 var modifier
-var flipped
+var flipped = 1
 
 func _ready():	
 	update_self()

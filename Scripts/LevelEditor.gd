@@ -52,6 +52,7 @@ func _process(delta):
 				new_cell.position = current_cell_position
 				new_cell.color = color
 				new_cell.modifier = modifier
+				new_cell.flipped = 1
 				
 				add_child(new_cell)
 				cells[current_cell_position] = new_cell
