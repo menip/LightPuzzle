@@ -14,9 +14,7 @@ var direction_choice = Vector2(0,1)
 var mouse_position
 
 func _ready():
-	##########TODO: REMOVE#######
-	setup_level("Level_YY")
-	#############################
+	setup_level(Global.current_level)
 	
 	$CanvasLayer/WinLossContainer.hide()
 	
@@ -148,9 +146,16 @@ func update_instructions():
 	player_instance.target_position = player_instance.position + player_instance.direction * Global.CELL_SIZE
 	
 func next_level():
-	#TODO
-	#get_tree().set_current_scene(next_scene_if_there_is_one)
-	pass
+	var current_level = int(Global.current_level)
+	if current_level != Global.FINAL_LEVEL_NUMBER:
+		current_level += 1
+		Global.current_level = "%03d" % current_level
+		get_tree().reload_current_scene() 
+	else:
+		pass#get_tree().change_scene_to(main_menu)
 	
 func reload_level():
 	get_tree().reload_current_scene()
+
+func _on_MainMenu_pressed():
+	get_tree().change_scene("res://Scenes/MainMenu.tscn")
