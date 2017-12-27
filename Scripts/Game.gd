@@ -1,3 +1,6 @@
+# NOTE: Consider always having player start White. No color choice.
+# Still can choose direction though
+
 extends Control
 
 export(PackedScene) var player
@@ -152,7 +155,7 @@ func next_level():
 		Global.current_level = "%03d" % current_level
 		get_tree().reload_current_scene() 
 	else:
-		pass#get_tree().change_scene_to(main_menu)
+		get_tree().change_scene("res://Scenes/MainMenu.tscn")
 	
 func reload_level():
 	get_tree().reload_current_scene()
