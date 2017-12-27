@@ -20,7 +20,7 @@ _data = [ Vector2( 0.0125386, 0.822266 ), 0.0, 0.0, 0, 0 ]
 width = 64
 curve = SubResource( 1 )
 
-[node name="LevelEditor" type="Control"]
+[node name="LevelEditor" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -147,6 +147,7 @@ align = 1
 
 [node name="CellModifierButtons" type="GridContainer" parent="GridContainer" index="1"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -284,13 +285,13 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 70.0
+margin_right = 58.0
 margin_bottom = 24.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-text = "Level_XX"
+text = "00X"
 expand_to_text_length = true
 focus_mode = 2
 placeholder_alpha = 0.6
@@ -305,7 +306,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 34.0
-margin_right = 70.0
+margin_right = 58.0
 margin_bottom = 54.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
