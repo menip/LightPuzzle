@@ -27,7 +27,6 @@ scale = Vector2( 1, 1 )
 
 [node name="HUD" type="VBoxContainer" parent="CanvasLayer" index="0"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -64,6 +63,7 @@ max_lines_visible = -1
 
 [node name="Directions" type="GridContainer" parent="CanvasLayer/HUD" index="1"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -163,86 +163,9 @@ text = "Right"
 flat = false
 align = 1
 
-[node name="Colors" type="HBoxContainer" parent="CanvasLayer/HUD" index="2"]
-
-editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 164.0
-margin_right = 135.0
-margin_bottom = 184.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 1
-size_flags_horizontal = 1
-size_flags_vertical = 1
-alignment = 0
-
-[node name="White" type="Button" parent="CanvasLayer/HUD/Colors" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 50.0
-margin_bottom = 20.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "White"
-flat = false
-align = 1
-
-[node name="Red" type="Button" parent="CanvasLayer/HUD/Colors" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 54.0
-margin_right = 90.0
-margin_bottom = 20.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Red"
-flat = false
-align = 1
-
-[node name="Blue" type="Button" parent="CanvasLayer/HUD/Colors" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 94.0
-margin_right = 135.0
-margin_bottom = 20.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Blue"
-flat = false
-align = 1
-
 [node name="WinLossContainer" type="VBoxContainer" parent="CanvasLayer" index="1"]
 
+editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

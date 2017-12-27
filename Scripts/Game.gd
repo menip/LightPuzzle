@@ -1,6 +1,3 @@
-# NOTE: Consider always having player start White. No color choice.
-# Still can choose direction though
-
 extends Control
 
 export(PackedScene) var player
@@ -11,7 +8,7 @@ var cells = {}
 var player_instance
 var level_area = Rect2(Vector2(200,30), Global.CELL_SIZE * Global.GRID_SIZE)
 
-var color_choice = Global.Colors.WHITE
+var color = Global.Colors.WHITE
 var direction_choice = Vector2(0,1)
 
 var mouse_position
@@ -26,11 +23,6 @@ func _ready():
 	$CanvasLayer/HUD/Directions/Down.connect("pressed", self, "_on_direction_choice_change", [Vector2(0, 1)])
 	$CanvasLayer/HUD/Directions/Left.connect("pressed", self, "_on_direction_choice_change", [Vector2(-1, 0)])
 	$CanvasLayer/HUD/Directions/Right.connect("pressed", self, "_on_direction_choice_change", [Vector2(1, 0)])
-	
-	# Setup Color chang signals
-	$CanvasLayer/HUD/Colors/White.connect("pressed", self, "_on_color_choice_change", [Global.Colors.WHITE])
-	$CanvasLayer/HUD/Colors/Red.connect("pressed", self, "_on_color_choice_change", [Global.Colors.RED])
-	$CanvasLayer/HUD/Colors/Blue.connect("pressed", self, "_on_color_choice_change", [Global.Colors.BLUE])
 
 func _process(delta):
 	if player_instance != null and !level_area.has_point(player_instance.position):
@@ -80,15 +72,12 @@ func load_level(name):
 func _on_direction_choice_change(choice):
 	direction_choice = choice
 
-func _on_color_choice_change(choice):
-	color_choice = choice
-
 func start_game(spawn_position):
 	if player_instance == null:
 		player_instance = player.instance()
 		player_instance.position = spawn_position
 		player_instance.direction = direction_choice
-		player_instance.color = color_choice
+		player_instance.color = color
 		
 		player_instance.target_position = spawn_position + direction_choice * Global.CELL_SIZE
 		
