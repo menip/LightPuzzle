@@ -20,9 +20,9 @@ Global="*res://Scripts/Global.gd"
 
 [display]
 
-window/size/height=720
+window/size/width=800
+window/size/height=640
 window/size/resizable=false
-window/size/borderless=true
 
 [gdnative]
 
