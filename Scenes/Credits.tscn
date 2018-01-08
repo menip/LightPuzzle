@@ -1,12 +1,12 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/CreditsScreen.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Background.png" type="Texture" id=2]
 [ext_resource path="res://Assets/comic_andy.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 
-size = 120
+size = 100
 use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 3 )
@@ -28,14 +28,14 @@ use_filter = false
 font_data = ExtResource( 3 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="MainMenu" type="Control"]
+[node name="Credits" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 800.0
-margin_bottom = 640.0
+margin_bottom = 631.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
 size_flags_horizontal = 1
@@ -45,86 +45,77 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="BackGround" type="Sprite" parent="." index="0"]
+[node name="Background" type="Sprite" parent="." index="0"]
 
 position = Vector2( 400, 320 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Name" type="Label" parent="." index="1"]
 
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 0.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -189.0
-margin_top = -235.0
-margin_right = 198.0
-margin_bottom = -100.0
+anchor_bottom = 0.0
+margin_left = -136.0
+margin_right = 136.0
+margin_bottom = 144.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 2
 size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = SubResource( 1 )
-text = "LightPuzzle"
+text = "Credits"
+align = 1
+valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="Buttons" type="VBoxContainer" parent="." index="2"]
+[node name="Descriptions" type="RichTextLabel" parent="." index="2"]
 
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -64.0
-margin_top = -53.0
-margin_right = 86.0
-margin_bottom = 110.0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 221.0
+margin_top = 104.0
+margin_right = 659.0
+margin_bottom = 605.0
 rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 1
+rect_clip_content = true
+mouse_filter = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-alignment = 0
-_sections_unfolded = [ "Rect", "custom_constants" ]
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_enabled = false
+bbcode_text = "Everything: menip
+Engine: Godot
+
+Twitter: MenipTweet
+Thanks for playing!"
+visible_characters = -1
+percent_visible = 1.0
+override_selected_font_color = false
+_sections_unfolded = [ "BBCode", "custom_fonts" ]
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Start" type="Button" parent="Buttons" index="0"]
+[node name="CloseButton" type="Button" parent="." index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 150.0
-margin_bottom = 78.0
-rect_min_size = Vector2( 150, 50 )
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/font = SubResource( 2 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Start"
-flat = true
-align = 0
-_sections_unfolded = [ "Rect", "Textures", "Theme", "Visibility", "custom_fonts" ]
-
-[node name="Credits" type="Button" parent="Buttons" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 82.0
-margin_right = 150.0
-margin_bottom = 160.0
-rect_min_size = Vector2( 150, 50 )
+margin_left = 357.0
+margin_top = 485.0
+margin_right = 463.0
+margin_bottom = 563.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
 size_flags_horizontal = 1
@@ -134,13 +125,11 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-text = "Credits"
+text = "Close"
 flat = true
-align = 0
-_sections_unfolded = [ "Rect", "custom_fonts" ]
+align = 1
+_sections_unfolded = [ "Focus", "custom_fonts" ]
 
-[connection signal="pressed" from="Buttons/Start" to="." method="_on_Start_pressed"]
-
-[connection signal="pressed" from="Buttons/Credits" to="." method="_on_Credits_pressed"]
+[connection signal="pressed" from="CloseButton" to="." method="_on_CloseButton_pressed"]
 
 

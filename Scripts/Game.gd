@@ -145,12 +145,10 @@ func next_level():
 		Global.current_level = "%03d" % current_level
 		get_tree().reload_current_scene() 
 	else:
-		_on_MainMenu_pressed()
+		get_tree().change_scene("res://Scenes/Credits.tscn")
 	
 func reload_level():
 	get_tree().reload_current_scene()
 
 func _on_MainMenu_pressed():
-	#get_tree().get_root().add_child(load("res://Scenes/MainMenu.tscn").instance())
-	#self.queue_free()
 	get_tree().change_scene("res://Scenes/MainMenu.tscn")
