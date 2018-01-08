@@ -1,7 +1,26 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/LevelSelect.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Game.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/comic_andy.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Assets/Background.png" type="Texture" id=4]
+[ext_resource path="res://Assets/comic_andy.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+
+size = 60
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 5 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=2]
+
+size = 64
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 5 )
+_sections_unfolded = [ "Font", "Settings" ]
 
 [node name="LevelSelect" type="Control"]
 
@@ -9,47 +28,58 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 1024.0
-margin_bottom = 720.0
+margin_right = 800.0
+margin_bottom = 642.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
 game = ExtResource( 2 )
+font = ExtResource( 3 )
 
-[node name="Label" type="Label" parent="." index="0"]
+[node name="Background" type="Sprite" parent="."]
+
+position = Vector2( 400.181, 320.181 )
+scale = Vector2( 1.00054, 1.00065 )
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="."]
 
 anchor_left = 0.5
 anchor_top = 0.0
 anchor_right = 0.5
 anchor_bottom = 0.0
-margin_left = -39.0
-margin_top = 26.0
-margin_right = 38.0
-margin_bottom = 40.0
+margin_left = -109.5
+margin_right = 108.5
+margin_bottom = 68.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 2
 size_flags_horizontal = 1
 size_flags_vertical = 4
+custom_fonts/font = SubResource( 1 )
 text = "Select Level"
 align = 1
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+_sections_unfolded = [ "custom_fonts" ]
 
-[node name="GridContainer" type="GridContainer" parent="." index="1"]
+[node name="GridContainer" type="GridContainer" parent="."]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 52.0
+margin_left = 51.0
 margin_top = 113.0
-margin_right = 976.0
-margin_bottom = 721.0
+margin_right = 747.0
+margin_bottom = 586.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 1
 size_flags_horizontal = 1
 size_flags_vertical = 1
@@ -57,5 +87,30 @@ custom_constants/vseparation = 50
 custom_constants/hseparation = 50
 columns = 10
 _sections_unfolded = [ "custom_constants" ]
+
+[node name="SampleButton" type="Button" parent="."]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -2.0
+margin_top = 75.0
+margin_right = 85.0
+margin_bottom = 153.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 2 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "XXX"
+flat = true
+_sections_unfolded = [ "custom_fonts" ]
 
 

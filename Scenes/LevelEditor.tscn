@@ -1,12 +1,13 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/LevelEditor.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Cell.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Art/Cell.png" type="Texture" id=3]
-[ext_resource path="res://Art/Angle.png" type="Texture" id=4]
-[ext_resource path="res://Art/Mirror.png" type="Texture" id=5]
-[ext_resource path="res://Art/ColorSwitch.png" type="Texture" id=6]
-[ext_resource path="res://Art/Final.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Cell.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Angle.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Mirror.png" type="Texture" id=5]
+[ext_resource path="res://Assets/ColorSwitch.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Final.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Player.png" type="Texture" id=8]
 
 [sub_resource type="Curve" id=1]
 
@@ -26,21 +27,19 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 1025.0
-margin_bottom = 600.0
+margin_right = 800.0
+margin_bottom = 640.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
 cell = ExtResource( 2 )
 
 [node name="Position2D" type="Position2D" parent="." index="0"]
 
-position = Vector2( 200, 30 )
+position = Vector2( 0.00464725, -0.0464067 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="GridContainer" type="GridContainer" parent="." index="1"]
 
@@ -48,10 +47,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -495.5
-margin_top = -569.0
-margin_right = -375.5
-margin_bottom = -28.0
+margin_left = 242.0
+margin_top = -602.0
+margin_right = 362.0
+margin_bottom = -61.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 1
 size_flags_horizontal = 1
@@ -323,6 +322,7 @@ align = 1
 
 [node name="Highlight" type="Sprite" parent="." index="2"]
 
+visible = false
 modulate = Color( 0.886719, 0.585373, 0.585373, 0.83 )
 position = Vector2( 193.303, 47.1625 )
 scale = Vector2( 1, 64 )
@@ -344,6 +344,12 @@ size_flags_vertical = 1
 popup_exclusive = false
 items = [  ]
 hide_on_checkable_item_selection = false
+
+[node name="Sprite" type="Sprite" parent="." index="4"]
+
+position = Vector2( 32, 32 )
+texture = ExtResource( 8 )
+_sections_unfolded = [ "Transform" ]
 
 [connection signal="pressed" from="GridContainer/Save/SaveButton" to="." method="_on_SaveButton_pressed"]
 

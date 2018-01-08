@@ -6,12 +6,13 @@ export(PackedScene) var cell
 var level
 var cells = {}
 var player_instance
-var level_area = Rect2(Vector2(200,30), Global.CELL_SIZE * Global.GRID_SIZE)
+var level_area = Rect2(Vector2(), Global.CELL_SIZE * Global.GRID_SIZE)
 
 var color = Global.Colors.WHITE
 var direction_choice = Vector2(0,1)
 
 var mouse_position
+var offset = Global.CELL_SIZE/2
 
 func _ready():
 	setup_level(Global.current_level)
@@ -31,7 +32,7 @@ func _process(delta):
 	$Highlight.hide()
 	
 	# Only concerned with mouse input inside of level grid
-	var snapped_position = get_global_mouse_position().snapped(Global.CELL_SIZE) #TODO: Ask if bad practice to be creating this new var every process cycle
+	var snapped_position = get_global_mouse_position().snapped(Global.CELL_SIZE) #+ offset #TODO: Ask if bad practice to be creating this new var every process cycle
 	if level_area.has_point(snapped_position):
 		$Highlight.position = snapped_position
 		$Highlight.show()
@@ -61,7 +62,7 @@ func load_level(name):
 			break
 		
 		var new_cell = cell.instance()
-		new_cell.position = Vector2(current_line["posx"], current_line["posy"])
+		new_cell.position = Vector2(current_line["posx"], current_line["posy"]) * Global.CELL_SIZE #+ offset
 		new_cell.color = int(current_line["color"])
 		new_cell.modifier = int(current_line["modifier"])
 		new_cell.flipped = current_line["flipped"]
@@ -75,7 +76,7 @@ func _on_direction_choice_change(choice):
 func start_game(spawn_position):
 	if player_instance == null:
 		player_instance = player.instance()
-		player_instance.position = spawn_position
+		player_instance.position = spawn_position 
 		player_instance.direction = direction_choice
 		player_instance.color = color
 		
@@ -144,10 +145,12 @@ func next_level():
 		Global.current_level = "%03d" % current_level
 		get_tree().reload_current_scene() 
 	else:
-		get_tree().change_scene("res://Scenes/MainMenu.tscn")
+		_on_MainMenu_pressed()
 	
 func reload_level():
 	get_tree().reload_current_scene()
 
 func _on_MainMenu_pressed():
+	#get_tree().get_root().add_child(load("res://Scenes/MainMenu.tscn").instance())
+	#self.queue_free()
 	get_tree().change_scene("res://Scenes/MainMenu.tscn")

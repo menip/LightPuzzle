@@ -15,7 +15,7 @@ var cells = {}
 
 func _ready():
 	anchor = $Position2D.position
-	rect_space = Rect2(anchor, Global.CELL_SIZE * Global.GRID_SIZE)
+	rect_space = Rect2(Vector2(), Global.CELL_SIZE * Global.GRID_SIZE)
 	$Highlight.hide()
 	
 	# Setup right click menu
@@ -38,8 +38,9 @@ func _process(delta):
 	mouse_position = get_global_mouse_position()
 	
 	# Only concerned with mouse input inside of level grid
-	if rect_space.has_point(mouse_position.snapped(Global.CELL_SIZE)):
-		current_cell_position = mouse_position.snapped(Global.CELL_SIZE)
+	var curr_cell_pos = mouse_position.snapped(Global.CELL_SIZE) + Global.CELL_SIZE/2
+	if rect_space.has_point(curr_cell_pos):
+		current_cell_position = curr_cell_pos
 		$Highlight.position = current_cell_position
 		$Highlight.show()
 		
@@ -91,8 +92,8 @@ func _on_SaveButton_pressed():
 	
 	for i in cells:
 		var save_dict = {
-			"posx"		: cells[i].position.x, 
-			"posy"		: cells[i].position.y,
+			"posx"		: int(cells[i].position.x / Global.CELL_SIZE.x), 
+			"posy"		: int(cells[i].position.y / Global.CELL_SIZE.y),
 			"color"		: cells[i].color, 
 			"modifier"	: cells[i].modifier, 
 			"flipped"	: cells[i].flipped

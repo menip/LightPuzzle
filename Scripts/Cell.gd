@@ -14,8 +14,8 @@ func update_self():
 
 func match_modifier():
 	match modifier:
-		Global.Modifier.ANGLE:			return "res://Art/Angle.png"
-		Global.Modifier.MIRROR: 		return "res://Art/Mirror.png"
-		Global.Modifier.COLOR_SWITCH: 	return "res://Art/ColorSwitch.png"
-		Global.Modifier.DEFAULT: 		return "res://Art/Cell.png"
-		Global.Modifier.FINAL:			return "res://Art/Final.png"
+		Global.Modifier.ANGLE:			return "res://Assets/Angle.png"
+		Global.Modifier.MIRROR: 		return "res://Assets/Mirror.png"
+		Global.Modifier.COLOR_SWITCH: 	return "res://Assets/ColorSwitch.png"
+		Global.Modifier.DEFAULT: 		return "res://Assets/Cell.png"
+		Global.Modifier.FINAL:			return "res://Assets/Final.png"

@@ -1,9 +1,5 @@
-{"color":1,"flipped":1,"modifier":2,"posx":512,"posy":192}
-{"color":1,"flipped":1,"modifier":0,"posx":512,"posy":320}
-{"color":2,"flipped":1,"modifier":2,"posx":384,"posy":320}
-{"color":2,"flipped":-1,"modifier":0,"posx":320,"posy":320}
-{"color":0,"flipped":1,"modifier":2,"posx":320,"posy":256}
-{"color":0,"flipped":1,"modifier":1,"posx":320,"posy":192}
-{"color":0,"flipped":1,"modifier":4,"posx":320,"posy":384}
-{"color":0,"flipped":-1,"modifier":1,"posx":704,"posy":192}
-{"color":0,"flipped":1,"modifier":1,"posx":512,"posy":256}
+{"color":0,"flipped":1,"modifier":4,"posx":5,"posy":5}
+{"color":0,"flipped":1,"modifier":2,"posx":9,"posy":0}
+{"color":0,"flipped":1,"modifier":2,"posx":0,"posy":0}
+{"color":0,"flipped":1,"modifier":2,"posx":0,"posy":9}
+{"color":0,"flipped":1,"modifier":2,"posx":9,"posy":9}

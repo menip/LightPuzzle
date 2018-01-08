@@ -6,7 +6,7 @@ enum Colors {WHITE, RED, BLUE}
 enum Modifier {ANGLE, MIRROR, COLOR_SWITCH, DEFAULT, FINAL}
 
 # This is probably bad way to do this, but it works
-const FINAL_LEVEL_NUMBER = 4
+const FINAL_LEVEL_NUMBER = 5
 var current_level = "000"
 
 func which_color(color):
