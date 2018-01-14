@@ -40,18 +40,18 @@ func _process(delta):
 		if Input.is_action_just_pressed("left_click") and !cells.has(snapped_position):
 			start_game(snapped_position)
 
-func setup_level(name):
-	level = name
-	$CanvasLayer/HUD/LevelName.text = name
-	load_level(name)
+func setup_level(level_name):
+	level = level_name
+	$CanvasLayer/HUD/LevelName.text = level_name
+	load_level(level_name)
 
-func load_level(name):
+func load_level(level_name):
 	var level = File.new()
-	if !level.file_exists("res://Levels/%s" % name):
-		print("%s does not exist." % name)
+	if !level.file_exists("res://Levels/%s" % level_name):
+		print("%s does not exist." % level_name)
 		return
 	
-	level.open("res://Levels/%s" % name, File.READ)
+	level.open("res://Levels/%s" % level_name, File.READ)
 	var current_line = {}
 	while !level.eof_reached():
 		current_line = parse_json(level.get_line())
