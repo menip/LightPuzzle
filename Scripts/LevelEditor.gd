@@ -4,9 +4,7 @@ export(PackedScene) var cell
 
 var color = Global.Colors.WHITE
 var modifier = Global.Modifier.DEFAULT
-var name
 
-var anchor
 var mouse_position
 var current_cell_position = Vector2()
 var rect_space
@@ -14,8 +12,10 @@ var rect_space
 var cells = {}
 
 func _ready():
-	anchor = $Position2D.position
-	rect_space = Rect2(Vector2(), Global.CELL_SIZE * Global.GRID_SIZE)
+	
+	# Chose to only specify offset here, and not throughout entire code base. 
+	# So while the rect enforces that levels be created inside bounds, we don't check anywhere else to make sure we are still in bounds
+	rect_space = Rect2(Global.LEVEL_OFFSET, Global.CELL_SIZE * Global.GRID_SIZE)
 	$Highlight.hide()
 	
 	# Setup right click menu
@@ -38,7 +38,8 @@ func _process(delta):
 	mouse_position = get_global_mouse_position()
 	
 	# Only concerned with mouse input inside of level grid
-	var curr_cell_pos = mouse_position.snapped(Global.CELL_SIZE) + Global.CELL_SIZE/2
+	var curr_cell_pos = mouse_position.snapped(Global.CELL_SIZE)
+	
 	if rect_space.has_point(curr_cell_pos):
 		current_cell_position = curr_cell_pos
 		$Highlight.position = current_cell_position
