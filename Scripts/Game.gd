@@ -143,8 +143,7 @@ func update_instructions():
 	player_instance.target_position = player_instance.position + player_instance.direction * Global.CELL_SIZE
 	
 func next_level():
-	var current_level = int(Global.current_level)
-	if current_level != Global.FINAL_LEVEL_NUMBER:
+	if int(Global.current_level) <= Global.FINAL_LEVEL_NUMBER:
 		get_tree().reload_current_scene() 
 	else:
 		get_tree().change_scene("res://Scenes/Credits.tscn")
