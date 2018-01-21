@@ -9,7 +9,7 @@ enum Modifier {ANGLE, MIRROR, COLOR_SWITCH, DEFAULT, FINAL}
 
 # This is probably bad way to do this, but it works
 const FINAL_LEVEL_NUMBER = 3
-var current_level = "000"
+var current_level = "000" # I should not of chosen to use strings
 
 
 func which_color(color):

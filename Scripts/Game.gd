@@ -90,7 +90,7 @@ func start_game(spawn_position):
 func success():
 	# Level over, no longer need player to update
 	$Player.disconnect("update_instructions", self, "update_instructions")
-	
+	Global.current_level = "%03d" % (int(Global.current_level) + 1)
 		
 	$CanvasLayer/WinLossContainer.show()
 	$CanvasLayer/WinLossContainer/WinLossText.text = "Success!"
@@ -145,8 +145,6 @@ func update_instructions():
 func next_level():
 	var current_level = int(Global.current_level)
 	if current_level != Global.FINAL_LEVEL_NUMBER:
-		current_level += 1
-		Global.current_level = "%03d" % current_level
 		get_tree().reload_current_scene() 
 	else:
 		get_tree().change_scene("res://Scenes/Credits.tscn")
