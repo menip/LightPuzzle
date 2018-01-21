@@ -88,6 +88,10 @@ func start_game(spawn_position):
 		$Player.connect("update_instructions", self, "update_instructions")
 
 func success():
+	# Level over, no longer need player to update
+	$Player.disconnect("update_instructions", self, "update_instructions")
+	
+		
 	$CanvasLayer/WinLossContainer.show()
 	$CanvasLayer/WinLossContainer/WinLossText.text = "Success!"
 	$CanvasLayer/WinLossContainer/WinLossButton.text = "Next"
