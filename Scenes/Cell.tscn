@@ -3,7 +3,6 @@
 [ext_resource path="res://Scripts/Cell.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Cell.png" type="Texture" id=2]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
@@ -22,11 +21,6 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
-color = 0
-modifier = 4
-teleport_location = null
-flipped = false
-final = false
 
 [node name="CellSprite" type="Sprite" parent="." index="0"]
 

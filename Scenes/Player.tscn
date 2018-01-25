@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 radius = 12.5017
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="Area2D" index="0"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )

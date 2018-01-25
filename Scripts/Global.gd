@@ -1,15 +1,16 @@
 extends Node
 
 const CELL_SIZE = Vector2(64, 64)
-const GRID_SIZE = Vector2(9, 9)
+const GRID_SIZE = Vector2(10, 10)
 const LEVEL_OFFSET = Vector2(32, 32)
 
 enum Colors {WHITE, RED, BLUE}
 enum Modifier {ANGLE, MIRROR, COLOR_SWITCH, DEFAULT, FINAL}
 
 # This is probably bad way to do this, but it works
-const FINAL_LEVEL_NUMBER = 3
-var current_level = "000" # I should not of chosen to use strings
+const FINAL_LEVEL_NUMBER = 11
+var current_level = 1
+var unlocked_level = 1
 
 
 func which_color(color):

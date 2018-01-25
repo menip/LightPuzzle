@@ -40,18 +40,18 @@ func _process(delta):
 		if Input.is_action_just_pressed("left_click") and !cells.has(snapped_position):
 			start_game(snapped_position)
 
-func setup_level(level_name):
-	level = level_name
-	$CanvasLayer/HUD/LevelName.text = level_name
-	load_level(level_name)
+func setup_level(level_number):
+	level = level_number
+	$CanvasLayer/HUD/LevelName.text = String(level_number)
+	load_level(level_number)
 
-func load_level(level_name):
+func load_level(level_number):
 	var level = File.new()
-	if !level.file_exists("res://Levels/%s" % level_name):
-		print("%s does not exist." % level_name)
+	if !level.file_exists("res://Levels/%d" % level_number):
+		print("%d does not exist." % level_number)
 		return
 	
-	level.open("res://Levels/%s" % level_name, File.READ)
+	level.open("res://Levels/%d" % level_number, File.READ)
 	var current_line = {}
 	while !level.eof_reached():
 		current_line = parse_json(level.get_line())
@@ -90,7 +90,11 @@ func start_game(spawn_position):
 func success():
 	# Level over, no longer need player to update
 	$Player.disconnect("update_instructions", self, "update_instructions")
-	Global.current_level = "%03d" % (int(Global.current_level) + 1)
+	
+	# TODO: not sure why I have to cast to int
+	if Global.current_level == Global.unlocked_level:
+		Global.unlocked_level += 1
+	Global.current_level += 1
 		
 	$CanvasLayer/WinLossContainer.show()
 	$CanvasLayer/WinLossContainer/WinLossText.text = "Success!"

@@ -38,6 +38,7 @@ margin_right = 800.0
 margin_bottom = 631.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
@@ -65,6 +66,7 @@ margin_right = 136.0
 margin_bottom = 144.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 2
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = SubResource( 1 )
@@ -89,6 +91,7 @@ margin_bottom = 605.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
 mouse_filter = 0
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 custom_fonts/normal_font = SubResource( 2 )
@@ -100,6 +103,16 @@ Twitter: MenipTweet
 Thanks for playing!"
 visible_characters = -1
 percent_visible = 1.0
+meta_underlined = true
+tab_size = 4
+text = "Everything: menip
+Engine: Godot
+
+Twitter: MenipTweet
+Thanks for playing!"
+scroll_active = true
+scroll_following = false
+selection_enabled = false
 override_selected_font_color = false
 _sections_unfolded = [ "BBCode", "custom_fonts" ]
 __meta__ = {
@@ -117,7 +130,9 @@ margin_top = 485.0
 margin_right = 463.0
 margin_bottom = 563.0
 rect_pivot_offset = Vector2( 0, 0 )
+focus_mode = 2
 mouse_filter = 0
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 custom_fonts/font = SubResource( 3 )
