@@ -53,6 +53,7 @@ texture = ExtResource( 4 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="1"]
 
+editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -319,6 +320,8 @@ group = null
 text = "Main Menu"
 flat = true
 align = 1
+
+[node name="Level" type="Node2D" parent="." index="2"]
 
 [connection signal="pressed" from="CanvasLayer/HUD/Directions/Up" to="." method="_on_direction_choice_change" binds= [ Vector2( 0, -1 ) ]]
 

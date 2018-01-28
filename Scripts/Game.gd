@@ -57,7 +57,7 @@ func load_level(level_number):
 		new_cell.flipped = current_line["flipped"]
 		
 		cells[new_cell.position] = new_cell
-		add_child(new_cell)
+		$Level.add_child(new_cell)
 
 func _on_direction_choice_change(choice):
 	direction_choice = choice
