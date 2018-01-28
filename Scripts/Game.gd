@@ -3,21 +3,14 @@ extends Control
 export(PackedScene) var player
 export(PackedScene) var cell
 
-var level # TODO: Need consistency with level_number in other parts of the code
-var cells = {}
-var player_instance
-var level_area = Rect2(Vector2(), Global.CELL_SIZE * Global.GRID_SIZE)
-
-var mouse_position
-
-var direction_choice = Vector2(0,1)
-
 var game_played = false
+var level_area = Rect2(Vector2(), Global.CELL_SIZE * Global.GRID_SIZE)
+var player_instance
+var cell_positions = []
+var direction_choice = Vector2(0,1)
 
 func _ready():
 	setup_level(Global.current_level)
-	
-	$CanvasLayer/WinLossContainer.hide()
 
 func _process(delta):
 	# If player is alive and goes outside level bounds, game over
@@ -28,11 +21,10 @@ func _process(delta):
 		# Only concerned with mouse input inside of level grid
 		var snapped_position = get_global_mouse_position().snapped(Global.CELL_SIZE) # TODO: I should probably not be creating a new Vector2 every time
 		if level_area.has_point(snapped_position):
-			if Input.is_action_just_pressed("left_click") and !cells.has(snapped_position):
+			if Input.is_action_just_pressed("left_click") and !cell_positions.has(snapped_position):
 				start_game(snapped_position)
 
 func setup_level(level_number):
-	level = level_number
 	$CanvasLayer/HUD/LevelName.text = String(level_number)
 	load_level(level_number)
 
@@ -43,6 +35,7 @@ func load_level(level_number):
 		return
 	
 	level.open("res://Levels/%d" % level_number, File.READ)
+	
 	var current_line = {}
 	while !level.eof_reached():
 		current_line = parse_json(level.get_line())
@@ -54,11 +47,11 @@ func load_level(level_number):
 		
 		var new_cell = cell.instance()
 		new_cell.position = Vector2(current_line["posx"], current_line["posy"]) * Global.CELL_SIZE
-		new_cell.color = int(current_line["color"]) # TODO: Should we use modulate values instead of a color var?
+		new_cell.color = int(current_line["color"])
 		new_cell.modifier = int(current_line["modifier"])
 		new_cell.flipped = current_line["flipped"]
 		
-		cells[new_cell.position] = new_cell
+		cell_positions.append(new_cell.position)
 		$Level.add_child(new_cell)
 
 func _on_direction_choice_change(choice):
@@ -66,11 +59,12 @@ func _on_direction_choice_change(choice):
 
 func start_game(spawn_position):
 	player_instance = player.instance()
+	
 	player_instance.position = spawn_position 
 	player_instance.direction = direction_choice
 	player_instance.color = Global.Colors.WHITE
 	
-	player_instance.target_position = spawn_position + direction_choice * Global.CELL_SIZE
+	player_instance.update_target_position()
 	
 	add_child(player_instance)
 	
