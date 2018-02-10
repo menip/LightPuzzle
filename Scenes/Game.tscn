@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -16,6 +16,14 @@ font_data = ExtResource( 5 )
 _sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="DynamicFont" id=2]
+
+size = 40
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 5 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=4]
 
 size = 40
 use_mipmaps = false
@@ -125,18 +133,21 @@ _sections_unfolded = [ "Rect", "custom_fonts" ]
 
 [node name="Directions" type="Control" parent="CanvasLayer/HUD" index="2"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 344.0
 margin_right = 135.0
-margin_bottom = 344.0
+margin_bottom = 444.0
+rect_min_size = Vector2( 0, 100 )
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
 
 [node name="Up" type="TextureButton" parent="CanvasLayer/HUD/Directions" index="0"]
 
@@ -233,8 +244,34 @@ group = null
 texture_normal = ExtResource( 6 )
 _sections_unfolded = [ "Rect", "Textures" ]
 
+[node name="MainMenuButton" type="Button" parent="CanvasLayer/HUD" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 494.0
+margin_right = 135.0
+margin_bottom = 544.0
+rect_pivot_offset = Vector2( 0, 0 )
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 4 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Main Menu"
+flat = true
+align = 1
+_sections_unfolded = [ "custom_fonts" ]
+
 [node name="WinLossContainer" type="VBoxContainer" parent="CanvasLayer" index="1"]
 
+editor/display_folded = true
 visible = false
 anchor_left = 0.5
 anchor_top = 0.5
@@ -330,6 +367,8 @@ align = 1
 [connection signal="pressed" from="CanvasLayer/HUD/Directions/Left" to="." method="_on_direction_choice_change" binds= [ Vector2( -1, 0 ) ]]
 
 [connection signal="pressed" from="CanvasLayer/HUD/Directions/Right" to="." method="_on_direction_choice_change" binds= [ Vector2( 1, 0 ) ]]
+
+[connection signal="pressed" from="CanvasLayer/HUD/MainMenuButton" to="." method="_on_MainMenu_pressed"]
 
 [connection signal="pressed" from="CanvasLayer/WinLossContainer/MainMenu" to="." method="_on_MainMenu_pressed"]
 
